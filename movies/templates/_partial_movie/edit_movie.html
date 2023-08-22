@@ -1,0 +1,73 @@
+<!-- The Modal -->
+<div class="modal" id="editMovie">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Movie</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="#" method="post" enctype="multipart/form-data" class="editMovie">
+                            <input type="hidden" id="id">
+                            <div class="form-group">
+                                <label for="movie_name">Movie Name</label>
+                                <input type="text" class="form-control" id="movie_name" name="movie_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="movie_genre">Movie Genre</label>
+                                <input type="text" class="form-control" id="movie_genre" name="movie_genre">
+                            </div>
+                            <div class="form-group">
+                                <label for="movie_language">Movie Language</label>
+                                <input type="text" class="form-control" id="movie_language" name="movie_language">
+                            </div>
+                            <div class="form-group">
+                                <label for="movie_rating">Movie Rating</label>
+                                <input type="text" class="form-control" id="movie_rating" name="movie_rating">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="edit()">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+            {% block script %}
+                <script>
+                    function edit() {
+                        var id = $('#id').val()
+                        var data = $('.editMovie').serialize()
+                        var url = '/movies/edit/' + id;
+                        var type = djangoNetworkModule.post()
+                        djangoNetworkModule.getData(url, type, data, function (response) {
+                            if (response.status === 'success') {
+                                swal.fire({
+                                    title: response.status,
+                                    text: response.message,
+                                    icon: response.status,
+                                    confirmButtonText: "OK",
+                                });
+                                $('#editMovie').modal('hide');
+                            } else {
+                                swal.fire({
+                                    title: "Error",
+                                    text: "Something went wrong",
+                                    icon: "error",
+                                    confirmButtonText: "OK",
+                                });
+                            }
+                        })
+                    }
+                </script>
+            {% endblock %}
+        </div>
+    </div>
+</div>

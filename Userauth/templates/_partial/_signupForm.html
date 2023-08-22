@@ -1,0 +1,57 @@
+{% block content %}
+    <div class="signinForm">
+        {% csrf_token %}
+        <form class="form-group" id="signinForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                {{ signupform.username }}
+                {% if signupform.username.errors %}
+                    <div class="error">
+                        {{ signupform.username.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                {{ signupform.first_name }}
+                {% if signupform.first_name.errors %}
+                    <div class="error">
+                        {{ signupform.first_name.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                {{ signupform.last_name }}
+                {% if signupform.last_name.errors %}
+                    <div class="error">
+                        {{ signupform.last_name.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{ signupform.password }}
+                {% if signupform.password.errors %}
+                    <div class="error">
+                        {{ signupform.password.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                {{ signupform.confirm_password }}
+                {% if signupform.confirm_password.errors %}
+                    <div class="error">
+                        {{ signupform.confirm_password.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-12 text-right">
+                <button type="button" onclick="signinForm()" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block javascript %}
+{% endblock %}
