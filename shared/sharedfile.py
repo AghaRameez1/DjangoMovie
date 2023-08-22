@@ -17,7 +17,7 @@ def send_otp_mail(User):
     msg_plain = render_to_string('Email_templates/otpemail.html', {'OTP': user.otp})
     from_email = 'agharameez1990@gmail.com'
     to_list = [user.email]
-    sent_email = send_mail(subject, msg_plain, from_email, to_list,html_message=msg_html, auth_password='ijxilhuhkzunizpf')
+    sent_email = send_mail(subject, msg_plain, from_email, to_list,html_message=msg_html, auth_password=None)
     if sent_email == 1:
         return True
     else:
