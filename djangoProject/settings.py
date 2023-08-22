@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,6 +164,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'agharameez1990@gmail.com'
+EMAIL_HOST_PASSWORD= os.environ.get('EMAIL_SECRET_PASSWORD')
 DEFAULT_FROM_EMAIL = 'testing@testing.com'
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 CORS_ORIGIN_ALLOW_ALL = True
