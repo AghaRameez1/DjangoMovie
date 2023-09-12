@@ -1,12 +1,22 @@
 version: '3.8'
 services:
   web:
-    build: .
-    command: python ./manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/project
+    build: 
+      context: AngularMovie/.
+      dockerfile: Dockerfile
+    environment:
+      API_URL: backend
     ports:
-      - 8000:8000
+      - 1337:80
+    depends_on:
+      - backend
+  backend:
+    build: 
+      context : DjangoMovie/.
+      dockerfile: Dockerfile
+    command: gunicorn djangoProject.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
     depends_on:
       - db
   db:
@@ -18,3 +28,4 @@ services:
       - postgres_data:/var/lib/postgresql/data/
 volumes:
   postgres_data:
+  static_volume:
